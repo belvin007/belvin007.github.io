@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belvin Benny — Portfolio</title>
+<meta name="description" content="Belvin Benny — Information Systems, Data & Digital Strategy. An artistic portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141210;
+    --page:#171512;
+    --cream:#f7f0df;
+    --cream-2:#efe6cd;
+    --teal:#1f8f8a;
+    --teal-dk:#146661;
+    --mustard:#ffcf3f;
+    --navy:#1b2a4a;
+    --navy-2:#233a63;
+    --orange:#ff7a3d;
+    --green:#8fd14f;
+    --pink:#ff5d8f;
+    --border:4px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--page);
+    color:var(--ink);
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1.4px);
+    background-size:16px 16px;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;object-fit:cover;}
+  a{color:inherit;text-decoration:none;}
+  .display{font-family:'Archivo Black',sans-serif;letter-spacing:-.01em;line-height:1.02;}
+  .hand{font-family:'Caveat',cursive;}
+  .pixel{font-family:'Press Start 2P',monospace;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+  .stack{padding:26px 0;}
+
+  /* poster card */
+  .poster{
+    border-radius:26px;border:var(--border) solid var(--ink);
+    box-shadow:10px 10px 0 rgba(0,0,0,.55);
+    padding:56px;position:relative;
+    margin:26px auto;max-width:1200px;
+  }
+  @media(max-width:700px){ .poster{padding:32px 22px;border-radius:20px;box-shadow:7px 7px 0 rgba(0,0,0,.55);} }
+  .c-cream{background:var(--cream);color:var(--ink);}
+  .c-teal{background:var(--teal);color:var(--cream);}
+  .c-mustard{background:var(--mustard);color:var(--ink);}
+  .c-navy{background:var(--navy);color:var(--cream);}
+  .c-orange{background:var(--orange);color:var(--ink);}
+  .c-green{background:var(--green);color:var(--ink);}
+  .c-pink{background:var(--pink);color:var(--cream);}
+
+  .eyebrow-tag{
+    display:inline-block;font-family:'Space Grotesk';font-weight:700;font-size:12.5px;
+    letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:100px;
+    border:2.5px solid currentColor;margin-bottom:18px;
+  }
+  h2.title{font-size:clamp(34px,5.6vw,58px);margin-bottom:6px;}
+  .subtitle{font-size:16px;opacity:.85;max-width:560px;margin-bottom:36px;font-weight:500;}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:var(--border) solid var(--ink);}
+  nav{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Archivo Black';font-size:18px;display:flex;align-items:center;gap:8px;}
+  .logo .dot{width:12px;height:12px;background:var(--orange);border:2.5px solid var(--ink);border-radius:50%;display:inline-block;}
+  .navlinks{display:flex;gap:22px;list-style:none;}
+  .navlinks a{font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:6px 2px;border-bottom:2.5px solid transparent;transition:border-color .2s;}
+  .navlinks a:hover{border-color:var(--orange);}
+  .navtoggle{display:none;background:var(--ink);color:var(--cream);border:none;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer;}
+  @media(max-width:840px){
+    .navlinks{position:fixed;top:57px;left:0;right:0;background:var(--cream);flex-direction:column;padding:18px 24px;border-bottom:var(--border) solid var(--ink);gap:14px;display:none;}
+    .navlinks.open{display:flex;}
+    .navtoggle{display:block;}
+  }
+
+  /* HERO */
+  .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center;}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(46px,8vw,92px);}
+  .hero h1 .out{-webkit-text-stroke:2.5px var(--ink);color:var(--cream);}
+  .hero-sub{font-size:17px;margin:20px 0 26px;max-width:480px;font-weight:500;}
+  .btnrow{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    padding:13px 24px;border-radius:100px;font-weight:700;font-size:14px;
+    border:3px solid var(--ink);display:inline-flex;align-items:center;gap:8px;
+    box-shadow:5px 5px 0 var(--ink);transition:transform .15s, box-shadow .15s;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink);}
+  .btn-solid{background:var(--orange);color:var(--ink);}
+  .btn-outline{background:transparent;color:var(--ink);}
+
+  .idcard{
+    background:var(--cream);border:3px solid var(--ink);border-radius:16px;padding:18px;
+    box-shadow:7px 7px 0 var(--ink);transform:rotate(-2deg);position:relative;
+  }
+  .idcard-top{display:flex;gap:14px;align-items:center;margin-bottom:14px;}
+  .idcard-photo{width:64px;height:64px;border-radius:10px;overflow:hidden;border:2.5px solid var(--ink);flex-shrink:0;}
+  .idcard-name{font-family:'Archivo Black';font-size:15px;}
+  .idcard-role{font-size:12px;font-weight:600;opacity:.75;}
+  .idcard table{width:100%;border-collapse:collapse;font-size:11.5px;}
+  .idcard td{padding:5px 0;border-top:1.5px dashed #b8ad8f;}
+  .idcard td.k{color:#7a705a;font-weight:700;text-transform:uppercase;letter-spacing:.05em;width:38%;}
+  .idcard-chip{position:absolute;top:-14px;right:-10px;background:var(--green);border:2.5px solid var(--ink);border-radius:100px;padding:5px 12px;font-size:10.5px;font-weight:700;transform:rotate(8deg);}
+
+  /* sticker + arrow annotations */
+  .sticker{
+    display:inline-flex;align-items:center;justify-content:center;text-align:center;
+    border:2.5px dashed currentColor;border-radius:50%;width:96px;height:96px;
+    font-family:'Space Grotesk';font-weight:700;font-size:11px;text-transform:uppercase;
+    letter-spacing:.03em;line-height:1.25;transform:rotate(-8deg);flex-shrink:0;
+  }
+  .note{font-family:'Caveat';font-weight:700;font-size:20px;line-height:1.15;}
+  .arrow-svg{stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;}
+
+  /* pill / badges */
+  .pill{
+    font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:100px;
+    border:2.5px solid var(--ink);background:var(--cream);color:var(--ink);display:inline-block;
+  }
+  .pill-row{display:flex;flex-wrap:wrap;gap:9px;}
+
+  /* tool badges (adobe-icon style) */
+  .tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:340px;}
+  @media(max-width:500px){.tool-grid{grid-template-columns:repeat(3,1fr);}}
+  .tool{
+    aspect-ratio:1;border-radius:14px;border:2.5px solid var(--ink);display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo Black';font-size:15px;color:var(--cream);box-shadow:3px 3px 0 var(--ink);
+  }
+
+  /* WHAT I DO layout */
+  .do-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  @media(max-width:800px){.do-grid{grid-template-columns:1fr;}}
+  .do-list{list-style:none;}
+  .do-list li{padding:12px 0 12px 30px;border-top:2.5px solid rgba(20,18,16,.15);position:relative;font-weight:600;font-size:15.5px;}
+  .do-list li:first-child{border-top:none;}
+  .do-list li::before{content:"→";position:absolute;left:0;font-family:'Archivo Black';}
+
+  /* EXPERIENCE */
+  .exp-card{
+    background:var(--cream);border:3px solid var(--ink);border-radius:16px;padding:24px 26px;
+    box-shadow:6px 6px 0 rgba(0,0,0,.35);margin-bottom:22px;color:var(--ink);
+  }
+  .exp-card:last-child{margin-bottom:0;}
+  .exp-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-bottom:4px;}
+  .exp-role{font-family:'Archivo Black';font-size:18px;}
+  .exp-date{font-weight:700;font-size:12.5px;padding:5px 12px;border:2px solid var(--ink);border-radius:100px;white-space:nowrap;}
+  .exp-org{font-weight:600;font-size:14px;opacity:.7;margin-bottom:12px;}
+  .exp-card ul{padding-left:20px;font-size:14px;opacity:.85;}
+  .exp-card li{margin-bottom:6px;}
+
+  /* PROJECTS - index cards */
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:900px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    background:var(--cream);border:3px solid var(--ink);border-radius:16px;padding:22px;
+    box-shadow:6px 6px 0 rgba(0,0,0,.4);color:var(--ink);
+  }
+  .proj-card:nth-child(2){transform:rotate(-1deg);}
+  .proj-card:nth-child(3){transform:rotate(1deg);}
+  .proj-tag{display:inline-block;background:var(--ink);color:var(--cream);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:12px;}
+  .proj-card h4{font-family:'Archivo Black';font-size:16.5px;margin-bottom:8px;line-height:1.2;}
+  .proj-meta{font-size:11.5px;opacity:.6;font-weight:600;margin-bottom:12px;}
+  .proj-card ul{padding-left:18px;font-size:13px;opacity:.85;margin-bottom:12px;}
+  .proj-card li{margin-bottom:5px;}
+
+  /* EDUCATION */
+  .edu-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;}
+  @media(max-width:860px){.edu-grid{grid-template-columns:1fr;}}
+  .edu-item{background:rgba(20,18,16,.06);border:2.5px solid var(--ink);border-radius:14px;padding:18px 20px;margin-bottom:16px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-item h4{font-family:'Archivo Black';font-size:16px;margin-bottom:4px;}
+  .edu-item .deg{font-weight:600;font-size:13.5px;margin-bottom:6px;}
+  .edu-item .meta{font-size:12px;opacity:.7;font-weight:600;}
+
+  /* retro computer SVG holder */
+  .crt-wrap{display:flex;justify-content:center;}
+
+  /* SKILLS split */
+  .split{display:grid;grid-template-columns:1fr 1fr;}
+  @media(max-width:760px){.split{grid-template-columns:1fr;}}
+  .split-half{padding:44px;}
+  @media(max-width:760px){.split-half{padding:30px 22px;}}
+  .split .c-orange{border-radius:22px 0 0 22px;}
+  .split .c-green{border-radius:0 22px 22px 0;}
+  @media(max-width:760px){
+    .split .c-orange{border-radius:22px 22px 0 0;}
+    .split .c-green{border-radius:0 0 22px 22px;}
+  }
+
+  /* CERTS */
+  .cert-row{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;}
+  .cert-stamp{
+    width:170px;text-align:center;background:var(--cream);color:var(--ink);
+    border:3px dashed var(--ink);border-radius:50%;padding:26px 16px;aspect-ratio:1;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+  }
+  .cert-stamp b{font-family:'Archivo Black';font-size:13px;line-height:1.2;margin-bottom:8px;}
+  .cert-stamp span{font-size:10.5px;font-weight:600;opacity:.7;}
+
+  /* PERSONAL / hobby collage */
+  .collage{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;gap:14px;}
+  @media(max-width:760px){.collage{grid-template-columns:repeat(2,1fr);}}
+  .collage figure{position:relative;border:3px solid var(--ink);border-radius:14px;overflow:hidden;box-shadow:4px 4px 0 rgba(0,0,0,.35);}
+  .collage figure img{width:100%;height:100%;}
+  .collage figure.big{grid-column:span 2;grid-row:span 2;}
+  .collage figcaption{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;font-size:11.5px;font-weight:700;background:linear-gradient(0deg,rgba(0,0,0,.8),transparent);color:#fff;}
+
+  /* SPORTS */
+  .sport-row{display:grid;grid-template-columns:170px 1fr;gap:26px;align-items:center;}
+  @media(max-width:600px){.sport-row{grid-template-columns:1fr;}}
+  .sport-row img{width:100%;height:170px;border-radius:16px;border:3px solid var(--ink);box-shadow:5px 5px 0 rgba(0,0,0,.35);}
+  .sport-row h4{font-family:'Archivo Black';font-size:20px;margin-bottom:8px;}
+
+  /* CONTACT */
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px;}
+  .clink{
+    display:flex;align-items:center;gap:9px;padding:13px 22px;border-radius:100px;
+    background:var(--cream);color:var(--ink);border:2.5px solid var(--ink);font-weight:700;font-size:14px;
+    box-shadow:4px 4px 0 rgba(0,0,0,.5);transition:transform .15s;
+  }
+  .clink:hover{transform:translate(-2px,-2px);}
+
+  footer{text-align:center;padding:28px 0;color:var(--cream-2);font-size:12.5px;opacity:.6;}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.show{opacity:1;transform:none;}
+
+  /* ===== side stickers ===== */
+  .edge-sticker{position:absolute;z-index:6;filter:drop-shadow(0 0 0 transparent);}
+  .edge-sticker.left{left:-38px;}
+  .edge-sticker.right{right:-38px;}
+  @media(max-width:980px){
+    .edge-sticker.left{left:-14px;}
+    .edge-sticker.right{right:-14px;}
+  }
+  .badge-circle{
+    width:82px;height:82px;border-radius:50%;background:var(--cream);border:3px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;
+    box-shadow:4px 4px 0 rgba(0,0,0,.45);gap:3px;
+  }
+  .badge-circle .emo{font-size:26px;line-height:1;}
+  .badge-circle .lbl{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:7.5px;
+    text-transform:uppercase;letter-spacing:.02em;color:var(--ink);line-height:1.15;padding:0 6px;}
+
+  .rainbow-sticker{
+    border:3px solid var(--ink);border-radius:10px;padding:12px 14px;text-align:center;width:132px;
+    background:linear-gradient(115deg,#ff5d8f,#ffcf3f,#8fd14f,#1f8f8a,#3a6ea5);
+    box-shadow:5px 5px 0 rgba(0,0,0,.5);
+  }
+  .rainbow-sticker span{font-family:'Press Start 2P',monospace;font-size:9.5px;color:#141210;
+    background:rgba(247,240,223,.9);padding:5px 6px;border-radius:4px;display:inline-block;line-height:1.5;}
+
+  .sparkle{position:absolute;color:var(--mustard);opacity:.85;z-index:4;}
+
+  /* keep this last so it wins the cascade over .badge-circle / .rainbow-sticker display rules */
+  @media(max-width:700px){
+    .edge-sticker{display:none;}
+    .sparkle{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>BELVIN BENNY</div>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#dowhat">What I Do</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#personal">Personal</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="index.html" style="color:var(--orange);">← Main Portfolio</a></li>
+    </ul>
+    <button class="navtoggle" id="navtoggle">MENU</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="stack">
+  <div class="poster c-cream reveal show">
+    <div class="edge-sticker left badge-circle" style="top:-24px;transform:rotate(-11deg);">
+      <span class="emo">🌼</span><span class="lbl">Growth<br>Mindset</span>
+    </div>
+    <div class="edge-sticker right badge-circle" style="top:60%;transform:rotate(9deg);">
+      <span class="emo">⭐</span><span class="lbl">Detail<br>Driven</span>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow-tag">MSIS Candidate · Central Michigan University</span>
+        <h1 class="display hero">BELVIN<br><span class="out">BENNY</span></h1>
+        <p class="hero-sub">Information systems thinker with a designer's eye — I turn data, process, and brand into strategy. Currently building toward Digital Marketing Analyst / MarTech &amp; Process Systems work.</p>
+        <div class="btnrow">
+          <a href="#projects" class="btn btn-solid">SEE MY WORK ↓</a>
+          <a href="#contact" class="btn btn-outline">SAY HELLO</a>
+          <a href="index.html" class="btn btn-outline">← MAIN PORTFOLIO</a>
+        </div>
+      </div>
+      <div class="idcard">
+        <div class="idcard-chip">OPEN TO WORK</div>
+        <div class="idcard-top">
+          <div class="idcard-photo"><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/5a3246d1-93ea-429c-b0b0-ba18da76c339-img_20240511?asset_id=17469d00-c77f-4a3b-8ece-0c226d0dcab6&img_etag=%22840aefce69e14581a880abca361023d9%22&image_assets=false&size=1024" alt="Belvin Benny" loading="lazy"></div>
+          <div>
+            <div class="idcard-name">BELVIN BENNY</div>
+            <div class="idcard-role">Information Systems · Digital Strategy</div>
+          </div>
+        </div>
+        <table>
+          <tr><td class="k">Base</td><td>Mount Pleasant, MI</td></tr>
+          <tr><td class="k">Focus</td><td>Data · Process · Content</td></tr>
+          <tr><td class="k">Grad</td><td>May 2027 (Expected)</td></tr>
+          <tr><td class="k">Email</td><td>benny1b@cmich.edu</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="stack" id="about">
+  <div class="poster c-teal reveal">
+    <div class="edge-sticker right badge-circle" style="top:36px;transform:rotate(-7deg);">
+      <span class="emo">🌏</span><span class="lbl">Global<br>Mindset</span>
+    </div>
+    <span class="eyebrow-tag">Hello, I'm Belvin</span>
+    <h2 class="title display">ABOUT ME</h2>
+    <p class="subtitle">Where I come from, and how I think.</p>
+    <div class="hero-grid" style="align-items:flex-start;">
+      <div>
+        <p style="margin-bottom:14px;font-size:15.5px;">I'm from <b>Wayanad, Kerala</b> — a state known for its culture, landscapes, and history — and that upbringing shaped how I approach problems: with curiosity, adaptability, and an eye for the bigger picture.</p>
+        <p style="margin-bottom:14px;font-size:15.5px;">I'm a <b>Master of Science in Information Systems</b> candidate at Central Michigan University, combining data analysis, systems design, and process documentation with a hands-on love for content strategy, brand storytelling, and social analytics.</p>
+        <p style="font-size:15.5px;">I design branded materials in <b>Canva, Adobe Express &amp; CapCut</b>, and apply SDLC, ERD/DFD modeling, and process-mining tools to real systems problems — two sides of the same analytical brain.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:center;">
+        <div class="sticker" style="color:var(--cream);">FROM<br>KERALA<br>INDIA</div>
+        <svg class="arrow-svg" width="90" height="60" viewBox="0 0 90 60" style="color:var(--cream);"><path d="M5,5 C40,0 55,45 85,50" marker-end="url(#ah)"/><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="currentColor"/></marker></defs></svg>
+        <p class="note" style="color:var(--cream);">still figuring life out, one project at a time!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I DO / WHAT I USE -->
+<section class="stack" id="dowhat">
+  <div class="poster c-mustard reveal">
+    <div class="edge-sticker left rainbow-sticker" style="top:-34px;transform:rotate(-6deg);">
+      <span>HELLO<br>WORLD</span>
+    </div>
+    <span class="eyebrow-tag">Skills in Action</span>
+    <h2 class="title display">WHAT I DO<br>WHAT I USE</h2>
+    <p class="subtitle">A cross-functional toolkit — systems on one side, storytelling on the other.</p>
+    <div class="do-grid">
+      <div>
+        <ul class="do-list">
+          <li>Systems analysis, ERD / DFD &amp; use-case modeling</li>
+          <li>Process mining &amp; documentation (Celonis, SOX, COSO)</li>
+          <li>SQL &amp; relational database design</li>
+          <li>Cloud fundamentals (AWS: EC2, IAM, S3)</li>
+          <li>Social content strategy &amp; brand storytelling</li>
+          <li>Web content management (Wix Studio)</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700;margin-bottom:14px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;">Tools I reach for</p>
+        <div class="tool-grid">
+          <div class="tool" style="background:#3a6ea5;">SQL</div>
+          <div class="tool" style="background:#4b8bbe;">PY</div>
+          <div class="tool" style="background:#ff9900;color:#141210;">AWS</div>
+          <div class="tool" style="background:#217346;">XL</div>
+          <div class="tool" style="background:#00c4cc;color:#141210;">CV</div>
+          <div class="tool" style="background:#ff0000;">AE</div>
+          <div class="tool" style="background:#000000;">CC</div>
+          <div class="tool" style="background:#1276e1;">CL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="stack" id="experience">
+  <div class="poster c-navy reveal">
+    <div class="edge-sticker right badge-circle" style="top:50px;transform:rotate(8deg);">
+      <span class="emo">⚡</span><span class="lbl">Fast<br>Learner</span>
+    </div>
+    <span class="eyebrow-tag">Career Path</span>
+    <h2 class="title display">EXPERIENCE</h2>
+    <p class="subtitle">From enterprise IT support to digital content strategy for university programs.</p>
+
+    <div class="exp-card">
+      <div class="exp-head"><span class="exp-role">Student Assistant — Social Media &amp; Web Content</span><span class="exp-date">AUG 2025 – PRESENT</span></div>
+      <div class="exp-org">CMU Honors Program, Central Michigan University · Mount Pleasant, MI</div>
+      <ul>
+        <li>Create and manage digital content for the Honors Program's social channels and official website.</li>
+        <li>Design promotional flyers and marketing materials (Track II, Scholarships, general Honors flyers) using Canva.</li>
+        <li>Develop content strategies aligned with CMU's branding and communication standards.</li>
+        <li>Maintain and update web content using Wix Studio.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-head"><span class="exp-role">Social Media Manager</span><span class="exp-date">AUG 2025 – PRESENT</span></div>
+      <div class="exp-org">Business Communication RSO, Central Michigan University · Mount Pleasant, MI</div>
+      <ul>
+        <li>Manage Instagram and LinkedIn presence, creating branded content aligned with CMU's standards.</li>
+        <li>Coordinate event promotions, design marketing materials, and communicate across stakeholder groups.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-head"><span class="exp-role">IT Support Specialist</span><span class="exp-date">MAR 2024 – DEC 2024</span></div>
+      <div class="exp-org">FEZA Interiors (Global Visa Online) · Kochi, Kerala, India · Remote</div>
+      <ul>
+        <li>Diagnosed and resolved hardware, software, and network issues, minimizing operational downtime.</li>
+        <li>Installed and configured enterprise systems; maintained audit-ready change logs.</li>
+        <li>Enforced cybersecurity protocols and data backup procedures for compliance.</li>
+        <li>Conducted end-user training, improving staff efficiency and standardizing procedures.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="stack" id="projects">
+  <div class="poster c-orange reveal">
+    <div class="edge-sticker left badge-circle" style="top:-24px;transform:rotate(-9deg);">
+      <span class="emo">🎯</span><span class="lbl">Goal<br>Oriented</span>
+    </div>
+    <span class="eyebrow-tag">Systems Analysis &amp; Design</span>
+    <h2 class="title display">PROJECTS</h2>
+    <p class="subtitle">Academic and applied systems projects — requirements to relational data models.</p>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <span class="proj-tag">01 · GROUP</span>
+        <h4>Cost-Aware Streaming Decision Support System</h4>
+        <div class="proj-meta">BIS 636 · CMU · Jan – Apr 2026</div>
+        <ul>
+          <li>Led systems analysis for a decision-support platform comparing streaming providers by cost.</li>
+          <li>Produced ERDs, Level 0/1 DFDs, and use case models via SDLC methodology.</li>
+          <li>Delivered a full system analysis report with a 4-member cross-functional team.</li>
+        </ul>
+        <div class="pill-row"><span class="pill">SDLC</span><span class="pill">ERD</span><span class="pill">DFD</span></div>
+      </div>
+      <div class="proj-card">
+        <span class="proj-tag">02 · CAPSTONE</span>
+        <h4>Plant Nursery Management System</h4>
+        <div class="proj-meta">Bengaluru North University · Mar – Apr 2023</div>
+        <ul>
+          <li>Built a business management system for inventory, sales, and customer data.</li>
+          <li>Designed a normalized relational database in SQL, eliminating redundancy.</li>
+        </ul>
+        <div class="pill-row"><span class="pill">SQL</span><span class="pill">Relational DB</span></div>
+      </div>
+      <div class="proj-card">
+        <span class="proj-tag">03 · ACADEMIC</span>
+        <h4>Tourist Management System</h4>
+        <div class="proj-meta">Bengaluru North University · Jul – Aug 2023</div>
+        <ul>
+          <li>Built a digital app replacing manual tourism workflows across bookings and itineraries.</li>
+          <li>Designed backend data models and user-facing flows for multi-category operations.</li>
+        </ul>
+        <div class="pill-row"><span class="pill">Data Modeling</span><span class="pill">UX Flows</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="stack" id="education">
+  <div class="poster c-green reveal">
+    <div class="edge-sticker right badge-circle" style="top:44px;transform:rotate(7deg);">
+      <span class="emo">🎓</span><span class="lbl">Lifelong<br>Learner</span>
+    </div>
+    <span class="eyebrow-tag">Academic Background</span>
+    <h2 class="title display">EDUCATION</h2>
+    <div class="edu-grid">
+      <div>
+        <div class="edu-item">
+          <h4>Central Michigan University</h4>
+          <div class="deg">Master of Science in Information Systems</div>
+          <div class="meta">Aug 2025 – May 2027 (Expected) · Mount Pleasant, MI</div>
+        </div>
+        <div class="edu-item">
+          <h4>Bengaluru North University</h4>
+          <div class="deg">Bachelor of Computer Applications — Koshys Institute of Management Studies</div>
+          <div class="meta">Aug 2020 – Aug 2023 · Bengaluru, Karnataka, India · Specialization: Cloud Computing</div>
+        </div>
+      </div>
+      <div class="crt-wrap">
+        <svg width="230" height="220" viewBox="0 0 230 220">
+          <rect x="20" y="10" width="190" height="140" rx="14" fill="#e7ddc4" stroke="#141210" stroke-width="4"/>
+          <rect x="34" y="24" width="162" height="98" rx="6" fill="#1f8f8a" stroke="#141210" stroke-width="3"/>
+          <text x="44" y="46" font-family="Press Start 2P, monospace" font-size="9" fill="#f7f0df">HELLO</text>
+          <text x="44" y="64" font-family="Press Start 2P, monospace" font-size="9" fill="#f7f0df">WORLD_</text>
+          <rect x="95" y="150" width="40" height="18" fill="#c9bd9c" stroke="#141210" stroke-width="4"/>
+          <rect x="60" y="168" width="110" height="14" rx="4" fill="#e7ddc4" stroke="#141210" stroke-width="4"/>
+          <circle cx="188" cy="132" r="5" fill="#ff5d8f" stroke="#141210" stroke-width="2.5"/>
+          <rect x="20" y="196" width="190" height="16" rx="6" fill="#141210"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS SPLIT -->
+<section class="stack">
+  <div class="poster reveal" style="padding:0;">
+    <div class="split">
+      <div class="split-half c-orange">
+        <span class="eyebrow-tag">Analytical Skills</span>
+        <h3 class="display" style="font-size:26px;margin-bottom:16px;">DATA &amp;<br>PROCESS</h3>
+        <div class="pill-row">
+          <span class="pill">SQL</span><span class="pill">Python</span><span class="pill">Java</span><span class="pill">C++</span>
+          <span class="pill">ERD / DFD</span><span class="pill">Use Case Modeling</span><span class="pill">Risk Assessment</span><span class="pill">SOX / COSO</span>
+        </div>
+      </div>
+      <div class="split-half c-teal">
+        <span class="eyebrow-tag" style="color:var(--cream);">Creative Skills</span>
+        <h3 class="display" style="font-size:26px;margin-bottom:16px;color:var(--cream);">BRAND &amp;<br>CONTENT</h3>
+        <div class="pill-row">
+          <span class="pill">Canva</span><span class="pill">Adobe Express</span><span class="pill">CapCut</span><span class="pill">Meta Business Suite</span>
+          <span class="pill">Copywriting</span><span class="pill">Social Analytics</span><span class="pill">Basic SEO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="stack">
+  <div class="poster c-navy reveal">
+    <div class="edge-sticker left badge-circle" style="top:44px;transform:rotate(-8deg);">
+      <span class="emo">✅</span><span class="lbl">Verified<br>Skills</span>
+    </div>
+    <span class="eyebrow-tag">Credentials</span>
+    <h2 class="title display">CERTIFICATIONS</h2>
+    <div class="cert-row">
+      <div class="cert-stamp"><b>CELONIS RISING STAR — TECHNICAL</b><span>Celonis Academy · Dec 2025</span></div>
+      <div class="cert-stamp"><b>CELONIS RISING STAR — BUSINESS</b><span>Celonis Academy · Dec 2025</span></div>
+      <div class="cert-stamp"><b>AWS CLOUD COMPUTING L1</b><span>RAT Technologies · Dec 2021</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL -->
+<section class="stack" id="personal">
+  <div class="poster c-cream reveal">
+    <div class="edge-sticker right badge-circle" style="top:44px;transform:rotate(8deg);">
+      <span class="emo">📸</span><span class="lbl">Always<br>Snapping</span>
+    </div>
+    <span class="eyebrow-tag">Beyond Work</span>
+    <h2 class="title display">PERSONAL</h2>
+    <p class="subtitle">Traveling, photography, hiking, and everything in between.</p>
+    <div class="collage">
+      <figure class="big"><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/60b3befa-caad-4436-ac9a-5f3b9bd2538e-nature_colla?asset_id=51e41196-9d6c-4486-8ce5-700d39c5a9a5&img_etag=%220c80346c4e9d44d5af94f732cdf7f81d%22&image_assets=false&size=1024" alt="Traveling" loading="lazy"><figcaption>Traveling — the world is full of magic</figcaption></figure>
+      <figure><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/ea7c59de-9978-4975-b208-ae1c542b27e7-download__2_?asset_id=dbc812b5-5707-4f9b-9596-04e8d7e25d45&img_etag=%2299552bb01b004bbea1d8de90d087fc55%22&image_assets=false&size=1024" alt="Hiking" loading="lazy"><figcaption>Hiking</figcaption></figure>
+      <figure><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/e3d445a5-68f8-41a0-b219-b6acfc8b69cc-_wallpaper_w?asset_id=b9fd7ea5-e798-4b87-8118-11dffc839ea0&img_etag=%22fef6a80452f94c6b90733b43d1003ff8%22&image_assets=false&size=1024" alt="Music" loading="lazy"><figcaption>Music is a therapy</figcaption></figure>
+      <figure><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/c485767a-b11f-4c9c-b778-45a2c8c1c8c8-whatsapp_ima?asset_id=b55054b1-ffa8-4e28-af46-dac69ac6e46d&img_etag=%2245aaf6c7f0f7467b94d9d9546f27dca2%22&image_assets=false&size=1024" alt="Mackinac Trip" loading="lazy"><figcaption>Mackinac Trip</figcaption></figure>
+      <figure><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/391aebce-379a-4d7c-87a8-cb5a6c95c11f-whatsapp_ima?asset_id=bf0c4d82-6e3f-4deb-a7d0-76368da3f354&img_etag=%22898231c889e04db0b4d740deab04a696%22&image_assets=false&size=1024" alt="CMU campus" loading="lazy"><figcaption>CMU Campus</figcaption></figure>
+      <figure><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/7c9cd650-c0d4-4543-a509-a317f9ecc15c-watch_movies?asset_id=a27f6627-562b-461d-9153-1995db00bc9c&img_etag=%22d8e16c38ef4f4a5eb0c4f90bea357cab%22&image_assets=false&size=1024" alt="Web series" loading="lazy"><figcaption>Web Series</figcaption></figure>
+      <figure><img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/d55f9fd3-6a7a-441a-9d06-c6a95bd46657-whatsapp_ima?asset_id=1c635cf3-dcf0-497f-841f-556d01ca92cd&img_etag=%220d8bb6a4cc0f495d9369a8781ebf3eb8%22&image_assets=false&size=1024" alt="Mainstage posters" loading="lazy"><figcaption>Mainstage Event</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- SPORTS -->
+<section class="stack">
+  <div class="poster c-mustard reveal">
+    <span class="eyebrow-tag">On the Field</span>
+    <h2 class="title display">SPORTS</h2>
+    <div class="sport-row">
+      <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/a2e2556c-2e14-48ac-877f-7bbdc2dbc9dd-fullsizerend?asset_id=5bf62b5d-44e8-4192-9bbd-05a76b344101&img_etag=%223a50f1ccdfea40a09b103c1bfede68a6%22&image_assets=false&size=1024" alt="Soccer" loading="lazy">
+      <div>
+        <h4>Soccer</h4>
+        <p>I've been playing football since 5th grade and remain passionate about it. I led my team in the U-18 State League — the discipline and teamwork from the pitch carries directly into how I collaborate on cross-functional project teams today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="stack" id="contact">
+  <div class="poster c-navy reveal" style="text-align:center;">
+    <div class="edge-sticker left badge-circle" style="top:44px;transform:rotate(-9deg);">
+      <span class="emo">💬</span><span class="lbl">Let's<br>Talk</span>
+    </div>
+    <span class="eyebrow-tag">Let's Connect</span>
+    <h2 class="title display" style="font-size:clamp(38px,6vw,64px);">HOPE TO<br>SEE YA &lt;3</h2>
+    <p class="subtitle" style="margin-left:auto;margin-right:auto;">Open to Digital Marketing Analyst, Social Media, and MarTech opportunities — or just a conversation about systems, design, and storytelling.</p>
+    <div class="contact-links">
+      <a class="clink" href="https://www.linkedin.com/in/belvin-benny-85378a2a8/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="clink" href="mailto:benny1b@cmich.edu">benny1b@cmich.edu</a>
+      <a class="clink" href="http://bennybelvin65@gmail.com">Gmail</a>
+      <a class="clink" href="https://wa.me/message/SMRKM66YKEX4O1" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="clink" href="https://www.instagram.com/belvin_007" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>Designed &amp; built by Belvin Benny · © 2026</footer>
+
+<script>
+  const navtoggle=document.getElementById('navtoggle');
+  const navlinks=document.getElementById('navlinks');
+  navtoggle.addEventListener('click',()=>navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

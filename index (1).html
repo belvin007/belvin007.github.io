@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belvin Benny — Information Systems | Digital Strategy</title>
+<meta name="description" content="Belvin Benny — MSIS Candidate, Central Michigan University. Data systems, process analysis, and digital content strategy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e17;
+    --bg-alt:#0d1220;
+    --surface:#121826;
+    --surface-2:#161d2e;
+    --border:#232b3d;
+    --text:#e7ecf5;
+    --text-dim:#95a1b8;
+    --text-faint:#5c6884;
+    --accent:#38e8d4;
+    --accent-2:#7c8cff;
+    --accent-3:#ff8a5c;
+    --grad: linear-gradient(120deg,var(--accent),var(--accent-2));
+    --radius:16px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#04110f;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;object-fit:cover;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  section{padding:110px 0;position:relative;}
+  h1,h2,h3,h4{font-weight:800;letter-spacing:-0.02em;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1.5px;background:var(--accent);display:inline-block;}
+  .section-title{font-size:clamp(28px,4vw,42px);margin-bottom:8px;}
+  .section-sub{color:var(--text-dim);max-width:640px;margin-bottom:52px;font-size:16px;}
+
+  /* background grid + glow */
+  .bg-fx{position:fixed;inset:0;z-index:-2;background:
+      radial-gradient(650px 400px at 12% -5%, rgba(56,232,212,.10), transparent 60%),
+      radial-gradient(600px 500px at 100% 10%, rgba(124,140,255,.12), transparent 60%),
+      var(--bg);}
+  .bg-grid{position:fixed;inset:0;z-index:-1;opacity:.35;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(10,14,23,.7);
+    border-bottom:1px solid var(--border);
+  }
+  nav{max-width:var(--maxw);margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;letter-spacing:.02em;}
+  .logo span{color:var(--accent);}
+  .navlinks{display:flex;gap:30px;list-style:none;}
+  .navlinks a{font-size:14px;color:var(--text-dim);font-weight:500;transition:color .2s;position:relative;}
+  .navlinks a:hover{color:var(--text);}
+  .nav-cta{
+    padding:9px 18px;border-radius:100px;font-size:13.5px;font-weight:600;
+    background:var(--grad);color:#04110f;
+  }
+  .navtoggle{display:none;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);cursor:pointer;}
+  @media(max-width:820px){
+    .navlinks{position:fixed;top:64px;left:0;right:0;background:var(--bg-alt);flex-direction:column;padding:22px 28px;border-bottom:1px solid var(--border);gap:18px;display:none;}
+    .navlinks.open{display:flex;}
+    .navtoggle{display:block;}
+    .nav-cta{display:none;}
+  }
+
+  /* HERO */
+  .hero{padding:180px 0 100px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(36px,5.4vw,58px);line-height:1.05;margin-bottom:20px;}
+  .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{color:var(--text-dim);font-size:18px;max-width:520px;margin-bottom:30px;}
+  .badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;}
+  .badge{
+    display:flex;align-items:center;gap:7px;
+    padding:7px 13px;border:1px solid var(--border);border-radius:100px;
+    font-size:12.5px;color:var(--text-dim);background:var(--surface);
+  }
+  .badge svg{width:13px;height:13px;stroke:var(--accent);}
+  .btnrow{display:flex;flex-wrap:wrap;gap:14px;}
+  .btn{
+    padding:13px 24px;border-radius:10px;font-weight:600;font-size:14.5px;
+    display:inline-flex;align-items:center;gap:8px;transition:transform .2s, box-shadow .2s;
+  }
+  .btn-primary{background:var(--grad);color:#04110f;box-shadow:0 8px 30px -8px rgba(56,232,212,.5);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);background:var(--surface);}
+  .btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px);}
+
+  .hero-portrait{position:relative;justify-self:center;}
+  .portrait-frame{
+    width:320px;height:380px;border-radius:22px;overflow:hidden;position:relative;
+    border:1px solid var(--border);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+  }
+  .portrait-frame img{width:100%;height:100%;}
+  .portrait-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,14,23,.85));}
+  .float-card{
+    position:absolute;background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:12px 16px;font-size:12.5px;font-family:'JetBrains Mono',monospace;
+    box-shadow:0 20px 40px -10px rgba(0,0,0,.5);
+  }
+  .float-card.top{top:-18px;left:-28px;color:var(--accent);}
+  .float-card.bottom{bottom:-18px;right:-28px;color:var(--accent-2);}
+  @media(max-width:500px){.float-card{display:none;}}
+
+  /* stat strip */
+  .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0;}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
+  @media(max-width:700px){.stats .wrap{grid-template-columns:repeat(2,1fr);}}
+  .stat b{display:block;font-size:28px;font-family:'JetBrains Mono',monospace;color:var(--accent);}
+  .stat span{font-size:12.5px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;}
+
+  /* CARD base */
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:28px;transition:border-color .25s, transform .25s;
+  }
+  .card:hover{border-color:rgba(56,232,212,.35);transform:translateY(-4px);}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--text-dim);margin-bottom:16px;font-size:15.5px;}
+  .about-grid p b{color:var(--text);font-weight:600;}
+  .roots-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px;}
+  @media(max-width:700px){.roots-strip{grid-template-columns:1fr;}}
+  .roots-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);position:relative;height:150px;}
+  .roots-item img{width:100%;height:100%;}
+  .roots-item .cap{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;font-size:12px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);}
+  .roots-item .cap a{color:var(--accent);font-size:11px;}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:900px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-card h4{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .skill-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:rgba(56,232,212,.1);}
+  .skill-icon svg{width:17px;height:17px;stroke:var(--accent);}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{
+    font-size:12px;padding:6px 11px;border-radius:100px;background:var(--surface-2);
+    border:1px solid var(--border);color:var(--text-dim);font-family:'JetBrains Mono',monospace;
+  }
+
+  /* EXPERIENCE timeline */
+  .timeline{position:relative;padding-left:32px;}
+  .timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent-2) 60%,transparent);}
+  .tl-item{position:relative;padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{position:absolute;left:-32px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);}
+  .tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:6px;}
+  .tl-role{font-size:18px;font-weight:700;}
+  .tl-date{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent);white-space:nowrap;}
+  .tl-org{color:var(--text-dim);font-size:14px;margin-bottom:12px;}
+  .tl-org b{color:var(--text);}
+  .tl-item ul{padding-left:18px;color:var(--text-dim);font-size:14.5px;}
+  .tl-item li{margin-bottom:6px;}
+  .tl-media{display:flex;gap:10px;margin-top:14px;}
+  .tl-media img{width:84px;height:84px;border-radius:10px;border:1px solid var(--border);}
+
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:920px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card .proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+  .proj-num{font-family:'JetBrains Mono',monospace;color:var(--text-faint);font-size:13px;}
+  .proj-card h4{font-size:17px;margin-bottom:8px;}
+  .proj-meta{font-size:12.5px;color:var(--text-faint);margin-bottom:14px;font-family:'JetBrains Mono',monospace;}
+  .proj-card ul{padding-left:18px;color:var(--text-dim);font-size:13.8px;margin-bottom:16px;}
+  .proj-card li{margin-bottom:6px;}
+
+  /* EDUCATION */
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media(max-width:820px){.edu-grid{grid-template-columns:1fr;}}
+  .edu-card .edu-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .edu-card h4{font-size:17px;}
+  .edu-card .deg{color:var(--accent);font-size:14px;margin-bottom:4px;}
+  .edu-card .loc{color:var(--text-faint);font-size:13px;margin-bottom:14px;}
+  .edu-card .course{font-size:13.2px;color:var(--text-dim);border-top:1px solid var(--border);padding-top:12px;margin-top:6px;}
+  .edu-media{display:flex;gap:10px;margin-top:16px;}
+  .edu-media img{flex:1;height:100px;border-radius:10px;border:1px solid var(--border);}
+
+  /* CERTS */
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:860px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-card{display:flex;gap:14px;align-items:flex-start;}
+  .cert-badge{width:44px;height:44px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .cert-badge svg{width:22px;height:22px;stroke:#04110f;}
+  .cert-card h4{font-size:14.5px;margin-bottom:4px;}
+  .cert-card span{font-size:12.5px;color:var(--text-faint);font-family:'JetBrains Mono',monospace;}
+
+  /* PERSONAL / HOBBIES */
+  .personal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media(max-width:900px){.personal-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.personal-grid{grid-template-columns:1fr;}}
+  .hobby-card img{width:100%;height:170px;border-radius:12px;margin-bottom:14px;border:1px solid var(--border);}
+  .hobby-card h4{font-size:15.5px;margin-bottom:6px;}
+  .hobby-card p{font-size:13.5px;color:var(--text-dim);}
+  .hobby-card.wide{grid-column:span 2;}
+  @media(max-width:900px){.hobby-card.wide{grid-column:span 2;}}
+  @media(max-width:600px){.hobby-card.wide{grid-column:span 1;}}
+  .quote{font-style:italic;color:var(--accent);font-size:14px;margin-top:8px;}
+
+  /* SPORTS */
+  .sport-card{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:center;}
+  @media(max-width:600px){.sport-card{grid-template-columns:1fr;}}
+  .sport-card img{width:100%;height:150px;border-radius:14px;border:1px solid var(--border);}
+  .sport-card h4{font-size:19px;margin-bottom:8px;}
+  .sport-card p{color:var(--text-dim);font-size:14.5px;}
+
+  /* CONTACT */
+  .contact-wrap{
+    background:linear-gradient(135deg, rgba(56,232,212,.08), rgba(124,140,255,.08));
+    border:1px solid var(--border);border-radius:24px;padding:60px 40px;text-align:center;
+  }
+  .contact-wrap h2{font-size:clamp(26px,4vw,40px);margin-bottom:14px;}
+  .contact-wrap p{color:var(--text-dim);max-width:520px;margin:0 auto 32px;}
+  .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;}
+  .clink{
+    display:flex;align-items:center;gap:9px;padding:12px 20px;border-radius:100px;
+    background:var(--surface);border:1px solid var(--border);font-size:14px;font-weight:500;
+    transition:transform .2s, border-color .2s;
+  }
+  .clink:hover{transform:translateY(-3px);border-color:var(--accent);}
+  .clink svg{width:16px;height:16px;stroke:var(--accent);}
+
+  footer{padding:34px 0;text-align:center;color:var(--text-faint);font-size:13px;border-top:1px solid var(--border);}
+  footer a{color:var(--accent);}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.show{opacity:1;transform:translateY(0);}
+
+  .section-num{position:absolute;top:110px;right:28px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-faint);}
+  @media(max-width:820px){.section-num{display:none;}}
+</style>
+</head>
+<body>
+<div class="bg-fx"></div>
+<div class="bg-grid"></div>
+
+<header>
+  <nav>
+    <div class="logo">BELVIN<span>.</span>BENNY</div>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#personal">Personal</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="design.html" style="color:var(--accent);">✦ Artistic Edition</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+    <button class="navtoggle" id="navtoggle" aria-label="menu">☰</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal show">
+      <div class="eyebrow">MSIS Candidate · Central Michigan University</div>
+      <h1>Belvin Benny — turning <span class="grad">systems &amp; stories</span> into strategy.</h1>
+      <p>Creative, detail-oriented Information Systems graduate student blending data analysis, process design, and cloud fundamentals with hands-on social media strategy and brand storytelling. Building toward a career as a Digital Marketing Analyst / MarTech &amp; Process Systems professional.</p>
+      <div class="badge-row">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Mount Pleasant, MI</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +1 (989) 933-6000</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg> benny1b@cmich.edu</span>
+      </div>
+      <div class="btnrow">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
+        <a href="design.html" class="btn btn-ghost" style="border-color:var(--accent);">✦ See the Artistic Edition</a>
+      </div>
+    </div>
+    <div class="hero-portrait reveal show">
+      <div class="portrait-frame">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/5a3246d1-93ea-429c-b0b0-ba18da76c339-img_20240511?asset_id=17469d00-c77f-4a3b-8ece-0c226d0dcab6&img_etag=%22840aefce69e14581a880abca361023d9%22&image_assets=false&size=1024" alt="Belvin Benny" loading="lazy">
+      </div>
+      <div class="float-card top">systems.design()</div>
+      <div class="float-card bottom">brand.strategy()</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>3</b><span>Technical Certifications</span></div>
+    <div class="stat"><b>3</b><span>Systems Projects</span></div>
+    <div class="stat"><b>6+</b><span>Skill Domains</span></div>
+    <div class="stat"><b>2027</b><span>Expected Graduation</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">Get to know me</div>
+    <h2 class="section-title reveal">About Myself</h2>
+    <p class="section-sub reveal">Where I come from, and how I work.</p>
+
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I am <b>Belvin Benny</b>, from Wayanad in Kerala State, India — a country of immense diversity, renowned for its culture, landscapes, and history. Growing up surrounded by that diversity shaped how I approach problems: with curiosity, adaptability, and an eye for the bigger picture.</p>
+        <p>I'm a <b>Master of Science in Information Systems</b> candidate at Central Michigan University, combining a strong information-systems foundation — data analysis, systems design, and process documentation — with a practical, hands-on understanding of content strategy, brand storytelling, and social media analytics.</p>
+        <p>Day to day, I design branded marketing materials in <b>Canva, Adobe Express, and CapCut</b>, manage Instagram, LinkedIn, and website platforms to grow audience engagement, and apply SDLC, ERD/DFD modeling, and process-mining tools to real systems-analysis problems. I'm seeking to bring this blend of creative and analytical skill to a <b>Digital Marketing Analyst, Social Media, or MarTech</b> role.</p>
+      </div>
+      <div class="reveal">
+        <div class="roots-strip">
+          <div class="roots-item">
+            <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/cca2042b-50be-4cf1-8d14-1bd3caef413c-kerala_state?asset_id=eedc1c3a-de65-4735-9ac7-e26ea27df61d&img_etag=%22b968ff2423df4061a274905f244b8845%22&image_assets=false&size=1024" alt="Kerala" loading="lazy">
+            <div class="cap">Proudly Indian · <a href="https://www.incredibleindia.gov.in/en" target="_blank" rel="noopener">Learn more →</a></div>
+          </div>
+          <div class="roots-item">
+            <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/3a387f0f-3a43-44e6-88af-0595902875cc-wayanad____t?asset_id=4d58400d-fcde-452f-b0c9-1275e29d3039&img_etag=%2280bf104811df436286bad71e719f3a1d%22&image_assets=false&size=1024" alt="Wayanad" loading="lazy">
+            <div class="cap">Beauty of my Hometown · <a href="https://www.wayanad.com/pages/about-wayanad" target="_blank" rel="noopener">Explore →</a></div>
+          </div>
+          <div class="roots-item">
+            <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/bda2bf3a-3dc3-44bb-8173-b36cca93a203-whatsapp_ima?asset_id=86b87cc4-893b-40dc-978d-5189543bc266&img_etag=%22e662d12423d542379c858ad3a111397a%22&image_assets=false&size=1024" alt="Home" loading="lazy">
+            <div class="cap">Home: everything started here · <a href="https://maps.app.goo.gl/kn77sdk4BsFR3sKPA?g_st=ipc" target="_blank" rel="noopener">Location →</a></div>
+          </div>
+          <div class="roots-item" style="grid-column:span 3;height:170px;">
+            <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/5237ad9a-b456-4dae-844a-c60debb52ced-tourist_spot?asset_id=01b56013-2371-45f7-925d-859b4b685274&img_etag=%226fb19a7dc9eb46ab8f2ed80c39ee4967%22&image_assets=false&size=1024" alt="Alappuzha" loading="lazy">
+            <div class="cap">Tourist Attraction: Alappuzha Backwaters · <a href="https://www.keralatourism.org/destination/alappuzha-beach/60/" target="_blank" rel="noopener">Know more →</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="eyebrow">Technical Profile</div>
+    <h2 class="section-title reveal">Skills &amp; Tooling</h2>
+    <p class="section-sub reveal">A cross-functional toolkit spanning data systems, cloud, compliance, and digital content.</p>
+
+    <div class="skills-grid">
+      <div class="card skill-card reveal">
+        <h4><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></span>Data &amp; Programming</h4>
+        <div class="pill-row">
+          <span class="pill">SQL</span><span class="pill">Python</span><span class="pill">Java</span><span class="pill">C++</span>
+          <span class="pill">Database Administration</span><span class="pill">Relational Data Modelling</span><span class="pill">Data Analysis</span>
+        </div>
+      </div>
+      <div class="card skill-card reveal">
+        <h4><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>Cloud &amp; Systems</h4>
+        <div class="pill-row">
+          <span class="pill">AWS (EC2, IAM, S3)</span><span class="pill">Billing &amp; Pricing</span><span class="pill">Cloud Studio</span>
+          <span class="pill">Wix Studio</span><span class="pill">SDLC</span><span class="pill">ERD / DFD</span><span class="pill">Use Case Modelling</span>
+        </div>
+      </div>
+      <div class="card skill-card reveal">
+        <h4><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 17V7l8 5-8 5z"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span>Business &amp; Process Tools</h4>
+        <div class="pill-row">
+          <span class="pill">Excel (Advanced)</span><span class="pill">Word</span><span class="pill">PowerPoint</span>
+          <span class="pill">Celonis (PQL, Pipelines)</span><span class="pill">Process Flow Docs</span><span class="pill">SOX Controls Awareness</span>
+        </div>
+      </div>
+      <div class="card skill-card reveal">
+        <h4><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>Audit &amp; Compliance</h4>
+        <div class="pill-row">
+          <span class="pill">Internal Control Docs</span><span class="pill">Risk Assessment</span><span class="pill">Process Narratives</span>
+          <span class="pill">Compliance Reporting</span><span class="pill">SOX</span><span class="pill">COSO Framework</span>
+        </div>
+      </div>
+      <div class="card skill-card reveal">
+        <h4><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>Social Media &amp; Content</h4>
+        <div class="pill-row">
+          <span class="pill">Canva</span><span class="pill">Adobe Express</span><span class="pill">CapCut</span><span class="pill">Meta Business Suite</span>
+          <span class="pill">Content Strategy</span><span class="pill">Copywriting</span><span class="pill">Brand Storytelling</span><span class="pill">Social Analytics</span><span class="pill">Basic SEO</span><span class="pill">Short-Form Video</span>
+        </div>
+      </div>
+      <div class="card skill-card reveal">
+        <h4><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Soft Skills</h4>
+        <div class="pill-row">
+          <span class="pill">Analytical Thinking</span><span class="pill">Problem-Solving</span><span class="pill">Communication</span>
+          <span class="pill">Team Collaboration</span><span class="pill">Time Management</span><span class="pill">Attention to Detail</span><span class="pill">Professional Ethics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">Career Path</div>
+    <h2 class="section-title reveal">Work Experience</h2>
+    <p class="section-sub reveal">From enterprise IT support to digital content strategy for university programs.</p>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <span class="tl-role">Student Assistant — Social Media &amp; Web Content</span>
+          <span class="tl-date">Aug 2025 – Present</span>
+        </div>
+        <div class="tl-org"><b>CMU Honors Program</b>, Central Michigan University · Mount Pleasant, MI</div>
+        <ul>
+          <li>Create and manage digital content for the Honors Program's social channels and official website, supporting student engagement and program visibility.</li>
+          <li>Design promotional flyers and marketing materials (Track II, Scholarships, general Honors flyers) using Canva and other design tools.</li>
+          <li>Collaborate with the Honors Program team to develop content strategies aligned with CMU's branding and communication standards.</li>
+          <li>Maintain and update web content using Wix Studio, ensuring accuracy and consistency across the program's digital presence.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <span class="tl-role">Social Media Manager</span>
+          <span class="tl-date">Aug 2025 – Present</span>
+        </div>
+        <div class="tl-org"><b>Business Communication RSO</b>, Central Michigan University · Mount Pleasant, MI</div>
+        <ul>
+          <li>Manage Instagram and LinkedIn presence for the organization, creating branded content aligned with CMU's professional communication standards.</li>
+          <li>Coordinate event promotions, design marketing materials, and communicate across stakeholder groups.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <span class="tl-role">IT Support Specialist</span>
+          <span class="tl-date">Mar 2024 – Dec 2024</span>
+        </div>
+        <div class="tl-org"><b>FEZA Interiors</b> (Global Visa Online) · Kochi, Kerala, India · Remote</div>
+        <ul>
+          <li>Diagnosed and resolved hardware, software, and network issues, maintaining business continuity and minimizing operational downtime across departments.</li>
+          <li>Installed, configured, and updated enterprise systems and applications; maintained comprehensive change logs for audit-ready documentation.</li>
+          <li>Enforced cybersecurity protocols and data backup procedures, ensuring data integrity and alignment with security compliance requirements.</li>
+          <li>Monitored and maintained network infrastructure, identifying and escalating vulnerabilities to reduce organizational risk.</li>
+          <li>Conducted end-user training sessions on IT tools and systems, improving staff efficiency and standardizing procedures.</li>
+          <li>Managed structured records of IT issues, resolutions, and system updates for internal review and management reporting.</li>
+        </ul>
+        <div class="tl-media">
+          <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/9dfbd1f3-97ed-4e6a-af79-e069aad0d345-whatsapp_ima?asset_id=8086263d-1e0d-4a75-b2d7-9aae67fab68c&img_etag=%22f54e18c02bc740e78fd8c66ba1b2ec2b%22&image_assets=false&size=1024" alt="Work" loading="lazy">
+          <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/89c172a3-a4ed-4c40-9380-762d07d05116-police_respo?asset_id=da0f0868-648f-4e39-b5db-3b88e6daa4d9&img_etag=%22cf53f9b63d164ed38714a70a48ac97de%22&image_assets=false&size=1024" alt="Work" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="eyebrow">Systems Analysis &amp; Design</div>
+    <h2 class="section-title reveal">Projects</h2>
+    <p class="section-sub reveal">Academic and applied systems projects — from requirements to relational data models.</p>
+
+    <div class="proj-grid">
+      <div class="card proj-card reveal">
+        <div class="proj-top"><span class="proj-num">01</span></div>
+        <h4>Cost-Aware Streaming Decision Support System</h4>
+        <div class="proj-meta">BIS 636 · Systems Analysis &amp; Design, CMU · Jan – Apr 2026 · Group Project</div>
+        <ul>
+          <li>Led systems analysis for a decision-support platform helping households find the most cost-efficient streaming option across providers.</li>
+          <li>Produced ERDs, Level 0/1 DFDs, and use case models using SDLC methodology.</li>
+          <li>Defined functional/non-functional requirements and traceable user stories; modeled subscription tier and bundle cost paths.</li>
+          <li>Collaborated with a 4-member cross-functional team to deliver a full system analysis report.</li>
+        </ul>
+        <div class="pill-row"><span class="pill">SDLC</span><span class="pill">ERD</span><span class="pill">DFD</span><span class="pill">Use Cases</span></div>
+      </div>
+
+      <div class="card proj-card reveal">
+        <div class="proj-top"><span class="proj-num">02</span></div>
+        <h4>Plant Nursery Management System</h4>
+        <div class="proj-meta">Capstone Project · Bengaluru North University · Mar – Apr 2023</div>
+        <ul>
+          <li>Designed and implemented a business management system for inventory tracking, sales processing, and customer data.</li>
+          <li>Built a normalized relational database in SQL, ensuring data integrity and eliminating redundancy.</li>
+          <li>Prepared internal process documentation to improve operational accuracy and support management review.</li>
+        </ul>
+        <div class="pill-row"><span class="pill">SQL</span><span class="pill">Relational DB</span><span class="pill">Reporting</span></div>
+      </div>
+
+      <div class="card proj-card reveal">
+        <div class="proj-top"><span class="proj-num">03</span></div>
+        <h4>Tourist Management System</h4>
+        <div class="proj-meta">Academic Project · Bengaluru North University · Jul – Aug 2023</div>
+        <ul>
+          <li>Developed a digital application replacing manual tourism workflows, reducing errors across bookings and itineraries.</li>
+          <li>Designed backend data models and user-facing interface flows for multi-category operations.</li>
+          <li>Translated technical design findings into documentation accessible to technical and non-technical audiences.</li>
+        </ul>
+        <div class="pill-row"><span class="pill">Data Modeling</span><span class="pill">UX Flows</span><span class="pill">Docs</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">Academic Background</div>
+    <h2 class="section-title reveal">Education</h2>
+    <p class="section-sub reveal">From cloud-computing fundamentals in Bengaluru to information systems at CMU.</p>
+
+    <div class="edu-grid">
+      <div class="card edu-card reveal">
+        <div class="edu-top">
+          <div>
+            <h4>Central Michigan University</h4>
+            <div class="deg">Master of Science in Information Systems</div>
+          </div>
+          <span class="tl-date">Aug 2025 – May 2027 (Expected)</span>
+        </div>
+        <div class="loc">1200 S Franklin St, Mount Pleasant, MI 48859 · <a href="https://www.cmich.edu/about" target="_blank" rel="noopener" style="color:var(--accent);">About CMU →</a></div>
+        <div class="course">Relevant coursework: Systems Analysis &amp; Design (BIS 636), Project Management (BUS 501), Business Intelligence, Database Management, IT Governance &amp; Compliance, Information Security.</div>
+        <div class="edu-media">
+          <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/e866ffe3-47aa-4832-8f78-fa058f7d5f59-warrnier_hal?asset_id=2ba7ca6b-ccda-40d7-9e0f-ed944076d50c&img_etag=%22df8b59788ff444999b05275e421a6b90%22&image_assets=false&size=1024" alt="CMU - Fire Up Chips" loading="lazy">
+        </div>
+      </div>
+
+      <div class="card edu-card reveal">
+        <div class="edu-top">
+          <div>
+            <h4>Bengaluru North University</h4>
+            <div class="deg">Bachelor of Computer Applications — Koshys Institute of Management Studies</div>
+          </div>
+          <span class="tl-date">Aug 2020 – Aug 2023</span>
+        </div>
+        <div class="loc">Bengaluru, Karnataka, India · <a href="https://www.kgi.edu.in/" target="_blank" rel="noopener" style="color:var(--accent);">About KGI →</a></div>
+        <div class="course">Specialization in Cloud Computing; coursework in data structures, software development, networking, and enterprise systems.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="eyebrow">Credentials</div>
+    <h2 class="section-title reveal">Certifications</h2>
+    <p class="section-sub reveal">Process mining and cloud fundamentals, formally certified.</p>
+
+    <div class="cert-grid">
+      <div class="card cert-card reveal">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg></div>
+        <div><h4>Celonis Process Mining — Rising Star Technical</h4><span>Celonis Academy · Dec 2025</span></div>
+      </div>
+      <div class="card cert-card reveal">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></svg></div>
+        <div><h4>Celonis Process Mining — Rising Star Business</h4><span>Celonis Academy · Dec 2025</span></div>
+      </div>
+      <div class="card cert-card reveal">
+        <div class="cert-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <div><h4>AWS Cloud Computing Level 1</h4><span>Core Services, IAM, Security &amp; Deployment · RAT Technologies · Dec 2021</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL / HOBBIES -->
+<section id="personal">
+  <div class="wrap">
+    <div class="eyebrow">Beyond Work</div>
+    <h2 class="section-title reveal">Personal Interests</h2>
+    <p class="section-sub reveal">Traveling, photography, hiking, and everything in between.</p>
+
+    <div class="personal-grid">
+      <div class="card hobby-card wide reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/60b3befa-caad-4436-ac9a-5f3b9bd2538e-nature_colla?asset_id=51e41196-9d6c-4486-8ce5-700d39c5a9a5&img_etag=%220c80346c4e9d44d5af94f732cdf7f81d%22&image_assets=false&size=1024" alt="Traveling" loading="lazy">
+        <h4>Traveling</h4>
+        <p>The world is full of magic; travel is how I find it.</p>
+      </div>
+      <div class="card hobby-card reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/ea7c59de-9978-4975-b208-ae1c542b27e7-download__2_?asset_id=dbc812b5-5707-4f9b-9596-04e8d7e25d45&img_etag=%2299552bb01b004bbea1d8de90d087fc55%22&image_assets=false&size=1024" alt="Hiking" loading="lazy">
+        <h4>Hiking</h4>
+        <p>Trails, mountains, camping — breathing the fresh air.</p>
+      </div>
+      <div class="card hobby-card reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/e3d445a5-68f8-41a0-b219-b6acfc8b69cc-_wallpaper_w?asset_id=b9fd7ea5-e798-4b87-8118-11dffc839ea0&img_etag=%22fef6a80452f94c6b90733b43d1003ff8%22&image_assets=false&size=1024" alt="Music" loading="lazy">
+        <h4>Listening to Music</h4>
+        <p>Music is a therapy.</p>
+      </div>
+      <div class="card hobby-card reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/7c9cd650-c0d4-4543-a509-a317f9ecc15c-watch_movies?asset_id=a27f6627-562b-461d-9153-1995db00bc9c&img_etag=%22d8e16c38ef4f4a5eb0c4f90bea357cab%22&image_assets=false&size=1024" alt="Web series" loading="lazy">
+        <h4>Watching Web Series</h4>
+        <p>Always got a series running in the background.</p>
+      </div>
+      <div class="card hobby-card reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/c485767a-b11f-4c9c-b778-45a2c8c1c8c8-whatsapp_ima?asset_id=b55054b1-ffa8-4e28-af46-dac69ac6e46d&img_etag=%2245aaf6c7f0f7467b94d9d9546f27dca2%22&image_assets=false&size=1024" alt="Mackinac Trip" loading="lazy">
+        <h4>During the Mackinac Trip</h4>
+        <p>One of my favorite recent adventures.</p>
+      </div>
+      <div class="card hobby-card reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/391aebce-379a-4d7c-87a8-cb5a6c95c11f-whatsapp_ima?asset_id=bf0c4d82-6e3f-4deb-a7d0-76368da3f354&img_etag=%22898231c889e04db0b4d740deab04a696%22&image_assets=false&size=1024" alt="CMU campus" loading="lazy">
+        <h4>Random Snap from CMU Campus</h4>
+        <p>Photography — capturing everyday moments.</p>
+      </div>
+      <div class="card hobby-card reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/d55f9fd3-6a7a-441a-9d06-c6a95bd46657-whatsapp_ima?asset_id=1c635cf3-dcf0-497f-841f-556d01ca92cd&img_etag=%220d8bb6a4cc0f495d9369a8781ebf3eb8%22&image_assets=false&size=1024" alt="Mainstage posters" loading="lazy">
+        <h4>Posters — Mainstage Event at CMU</h4>
+        <p>Every picture does have a story.</p>
+      </div>
+      <div class="card hobby-card wide reveal">
+        <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/a711df5e-c3da-421f-9228-7922852de31c-whatsapp_ima?asset_id=6a3aaeb7-527a-4216-816d-f664594b56da&img_etag=%22de652fec917044e082358c7c71d382b0%22&image_assets=false&size=1024" alt="Architecture" loading="lazy">
+        <h4>Architecture</h4>
+        <p>"No camera can capture, what your eyes capture."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPORTS -->
+<section style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="eyebrow">On the Field</div>
+    <h2 class="section-title reveal">Sports</h2>
+    <p class="section-sub reveal">Soccer has been a constant since childhood.</p>
+
+    <div class="card sport-card reveal">
+      <img src="https://new.express.adobe.com/webpage/5FP1xY6ZOCamG/resources/a2e2556c-2e14-48ac-877f-7bbdc2dbc9dd-fullsizerend?asset_id=5bf62b5d-44e8-4192-9bbd-05a76b344101&img_etag=%223a50f1ccdfea40a09b103c1bfede68a6%22&image_assets=false&size=1024" alt="Soccer - U18 State League" loading="lazy">
+      <div>
+        <h4>Soccer</h4>
+        <p>I have been playing football since 5th grade and remain passionate about it. I led my team in the U-18 State League — the discipline and teamwork from the pitch carries directly into how I collaborate on cross-functional project teams today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-wrap reveal">
+      <div class="eyebrow" style="justify-content:center;">Let's connect</div>
+      <h2>Hope to see ya <span class="grad" style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;">&lt;3</span></h2>
+      <p>Open to Digital Marketing Analyst, Social Media, and MarTech opportunities — or just a conversation about systems, design, and storytelling.</p>
+      <div class="contact-links">
+        <a class="clink" href="https://www.linkedin.com/in/belvin-benny-85378a2a8/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn
+        </a>
+        <a class="clink" href="mailto:benny1b@cmich.edu">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg> benny1b@cmich.edu
+        </a>
+        <a class="clink" href="http://bennybelvin65@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg> Gmail
+        </a>
+        <a class="clink" href="https://wa.me/message/SMRKM66YKEX4O1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp
+        </a>
+        <a class="clink" href="https://www.instagram.com/belvin_007" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg> Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Designed &amp; built by <a href="https://www.linkedin.com/in/belvin-benny-85378a2a8/" target="_blank" rel="noopener">Belvin Benny</a> · © 2026</div>
+</footer>
+
+<script>
+  const navtoggle=document.getElementById('navtoggle');
+  const navlinks=document.getElementById('navlinks');
+  navtoggle.addEventListener('click',()=>navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
